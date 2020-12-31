@@ -1,4 +1,9 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
-export default Component.extend({
-});
+export default class PeopleListComponent extends Component {
+  @action
+  showPerson(person) {
+    alert(`The person's name is ${person}!`);
+  }
+}
