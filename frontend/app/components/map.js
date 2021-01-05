@@ -1,4 +1,8 @@
 import Component from '@ember/component';
+import ENV from 'frontend/config/environment';
 
-export default Component.extend({
-});
+export default class MapComponent extends Component {
+  get token() {
+    return encodeURIComponent(ENV.MAPBOX_ACCESS_TOKEN);
+  }
+}
