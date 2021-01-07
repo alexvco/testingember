@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   mount_ember_app :frontend, to: "/"
   match '/rentals',          to: 'rentals#index',   via: :get,           as:   :rentals, constraints: -> request { request.format == :json }
+  match '/rentals/:id',          to: 'rentals#show',   via: :get,           as:   :rental, constraints: -> request { request.format == :json }
 end
