@@ -12,16 +12,16 @@ export default class ShareButtonComponent extends Component {
 
     url.searchParams.set('url', this.currentURL);
 
-    if (this.attrs.text) {
-      url.searchParams.set('text', this.attrs.text);
+    if (this.text) {
+      url.searchParams.set('text', this.text);
     }
 
-    if (this.attrs.hashtags) {
-      url.searchParams.set('hashtags', this.attrs.hashtags);
+    if (this.hashtags) {
+      url.searchParams.set('hashtags', this.hashtags);
     }
 
-    if (this.attrs.via) {
-      url.searchParams.set('via', this.attrs.via);
+    if (this.via) {
+      url.searchParams.set('via', this.via);
     }
 
     return url;
