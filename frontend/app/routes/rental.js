@@ -1,10 +1,9 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default class RentalRoute extends Route {
+  @service store;
   async model(params) {
-    let response = await fetch(`http://localhost:3001/rentals/${params.rental_id}.json`);
-    let rental = await response.json();
-
-    return rental;
+    return this.store.find('rental', params.rental_id);
   }
 }
