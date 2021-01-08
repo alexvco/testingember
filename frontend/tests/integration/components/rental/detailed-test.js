@@ -18,7 +18,7 @@ module('Integration | Component | rental/detailed', function(hooks) {
           lng: -122.4194,
         },
         category: 'Estate',
-        type: 'Standalone',
+        rental_type: 'Standalone',
         bedrooms: 15,
         image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description: 'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
