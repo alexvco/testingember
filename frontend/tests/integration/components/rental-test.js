@@ -10,15 +10,10 @@ module('Integration | Component | rental', function(hooks) {
     this.owner.setupRouter();
   });
 
-  test('it renders information about a rental property', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
-    await render(hbs`<Rental />`);
-    
+  test('it renders all given rental properties by default', async function(assert) {
     this.setProperties({
-      rental: {
-        id: 2,
+      rentals: [{
+        id: 1,
         title: 'Grand Old Mansion',
         owner: 'Veruca Salt',
         city: 'San Francisco',
@@ -31,19 +26,49 @@ module('Integration | Component | rental', function(hooks) {
         bedrooms: 15,
         image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
         description: 'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
-      }
+      },
+      {
+        id: 2,
+        title: 'Urban Living',
+        owner: 'Mike Teavee',
+        city: 'Seattle',
+        location: {
+          lat: 47.6062,
+          lng: -122.3321
+        },
+        category: 'Condo',
+        rental_type: 'Community',
+        bedrooms: 1,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Alfonso_13_Highrise_Tegucigalpa.jpg',
+        description: 'A commuters dream. This rental is within walking distance of 2 bus stops and the Metro.'
+      },
+      {
+        id: 3,
+        title: 'Downtown Charm',
+        owner: 'Violet Beauregarde',
+        city: 'Portland',
+        location: {
+          lat: 45.5175,
+          lng: -122.6801
+        },
+        category: 'Apartment',
+        type: 'Community',
+        bedrooms: 3,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg',
+        description: 'Convenience is at your doorstep with this charming downtown rental. Great restaurants and active night life are within a few feet.'
+      }]
     });
 
-    await render(hbs`<Rental @rental={{this.rental}} />`);
-    
-    assert.dom('article').hasClass('rental');
-    assert.dom('article h3').hasText('Grand Old Mansion');
-    assert.dom('article h3 a').hasAttribute('href', '/rentals/2');
-    assert.dom('article .detail.owner').includesText('Veruca Salt');
-    assert.dom('article .detail.type').includesText('Standalone');
-    assert.dom('article .detail.location').includesText('San Francisco');
-    assert.dom('article .detail.bedrooms').includesText('15');
-    assert.dom('article .image').exists();
-    assert.dom('article .map').exists();
+    await render(hbs`<Rentals @rentals={{this.rentals}} />`);
+
+    assert.dom('.rentals').exists();
+    assert.dom('.rentals input').exists();
+
+    assert.dom('.rentals .results').exists();
+    assert.dom('.rentals .results li').exists({ count: 3 });
+
+    assert.dom('.rentals .results li:nth-of-type(1)').containsText('Grand Old Mansion');
+    assert.dom('.rentals .results li:nth-of-type(2)').containsText('Urban Living');
+    assert.dom('.rentals .results li:nth-of-type(3)').containsText('Downtown Charm');
   });
 });
